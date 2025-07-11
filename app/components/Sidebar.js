@@ -25,9 +25,9 @@ const Sidebar = () => {
   const pageName = path.split("/").pop();
 
   const menuItems = [
-    { name: "Dashboard", icon: Home, link: "/admin/CatMang", path: "Dashboard" },
-    // { name: "KYC Details", icon: FileCheck, link: "/admin/KYCApproval", path: "KYCApproval" },
-    // { name: "Fund Raises", icon: UserPlus, link: "/admin/NeedyApproval", path: "NeedyApproval" },
+    { name: "Dashboard", icon: Home, link: "/admin/Dashboard", path: "Dashboard" },
+    { name: "Color Management", icon: FileCheck, link: "/admin/ColorMang", path: "ColorMangement" },
+    { name: "Order Management", icon: UserPlus, link: "/admin/OrderMang", path: "OrderManagement" },
     // { name: "Donations", icon: HandHeart, link: "/admin/Donations", path: "Donations" },
     // { name: "Contact Inqueries", icon: Contact, link: "/admin/ContactInqueries", path: "ContactInqueries" },
     // { name: "Notifications", icon: Bell, link: "/admin/Notification", path: "Notification" },
@@ -50,7 +50,7 @@ const Sidebar = () => {
     <div>
       <button
         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-        className="block md:hidden p-2 text-gray-700 md:fixed absolute top-3 left-2 z-10"
+        className="block md:hidden p-2 text-black md:fixed absolute top-3 left-2 z-10"
       >
         {/* {isSidebarOpen ? <X size={32} /> : <Menu size={24} color="black" />} */}
         <Menu size={24} color="black" />
@@ -78,7 +78,7 @@ const Sidebar = () => {
               className={`flex items-center gap-4 px-6 cursor-pointer md:py-3 py-4 text-sm font-[SairaMedium] ${
                 pageName === item.path
                   ? "bg-gray-50"
-                  : ""
+                  : "bg-amber-300"
               }`}
             >
               <item.icon size={20} />
