@@ -12,94 +12,128 @@ import {
   Settings2,
   FileCheck,
   LogOut,
-  X
+  X,
 } from "lucide-react";
-// import { auth } from "../utils/firebaseConfig";
 import { usePathname, useRouter } from "next/navigation";
 
 const Sidebar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
   const router = useRouter();
   const path = usePathname();
   const pageName = path.split("/").pop();
 
   const menuItems = [
-    { name: "Dashboard", icon: Home, link: "/admin/Dashboard", path: "Dashboard" },
-    { name: "Color Management", icon: FileCheck, link: "/admin/ColorMang", path: "ColorMangement" },
-    { name: "Order Management", icon: UserPlus, link: "/admin/OrderMang", path: "OrderManagement" },
-    { name: "Product Management", icon: HandHeart, link: "/admin/ProductMang", path: "ProductManagement" },
-    { name: "Category Management", icon: Contact, link: "/admin/CatMang", path: "CategoryMangement" },
-    { name: "User Management", icon: Bell, link: "/admin/UserMang", path: "UserManagement" },
-    // { name: "Users", icon: Users, link: "/admin/Users", path: "Users" },
-    // { name: "Settings", icon: Settings2, link: "/admin/Settings", path: "Settings" },
-
+    {
+      name: "Dashboard",
+      icon: Home,
+      link: "/admin/Dashboard",
+      path: "Dashboard",
+    },
+    {
+      name: "Color Management",
+      icon: FileCheck,
+      link: "/admin/ColorMang",
+      path: "ColorMang",
+    },
+    {
+      name: "Order Management",
+      icon: UserPlus,
+      link: "/admin/OrderMang",
+      path: "OrderMang",
+    },
+    {
+      name: "Product Management",
+      icon: HandHeart,
+      link: "/admin/ProductMang",
+      path: "ProductMang",
+    },
+    {
+      name: "Category Management",
+      icon: Contact,
+      link: "/admin/CatMang",
+      path: "CatMang",
+    },
+    {
+      name: "User Management",
+      icon: Bell,
+      link: "/admin/UserMang",
+      path: "UserMang",
+    },
   ];
 
-  const handleMenuClick = () => {
-    setIsSidebarOpen(false);
-  };
-
   const handleLogout = () => {
-    // auth.signOut();
-    // localStorage.removeItem("users");
     router.push("/auth/Login");
   };
 
+  const handleMenuClick = () => setIsSidebarOpen(false);
+
   return (
     <div>
+      {/* Toggle Button for Mobile */}
       <button
         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-        className="block md:hidden p-2 text-black md:fixed absolute top-3 left-2 z-10"
+        className="md:hidden p-2 fixed top-4 left-4 z-50 bg-white shadow-lg rounded-full"
       >
-        {/* {isSidebarOpen ? <X size={32} /> : <Menu size={24} color="black" />} */}
-        <Menu size={24} color="black" />
+        <Menu size={24} />
       </button>
 
+      {/* Sidebar */}
       <aside
-          className={`fixed top-0 left-0 w-64 overflow-y-auto flex flex-col border-r h-full z-40 bg-white transform transition-transform duration-300 ${
+        className={`fixed top-0 left-0 h-full w-64 bg-white border-r shadow-xl z-40 transform transition-transform duration-300 ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
         } md:translate-x-0`}
       >
-        <div onClick={() => setIsSidebarOpen(!isSidebarOpen)} className=" md:hidden fixed top-3 left-4">
-          <X size={32} /> 
+        {/* Close on mobile */}
+        <div
+          onClick={() => setIsSidebarOpen(false)}
+          className="md:hidden absolute top-4 right-4 cursor-pointer"
+        >
+          <X size={28} className="text-gray-700" />
         </div>
 
-        <div className="p-8">
-          <img src="/logo-donation.png" alt="Logo" />
+        {/* Logo */}
+        <div className="p-6 border-b border-gray-100 flex items-center justify-center">
+          <img src="/logo.jpg" alt="Logo" height={50} />
         </div>
 
-        <nav className="flex-1">
-          {menuItems.map((item, index) => (
-            <Link
-              key={index}
-              href={item.link}
-              onClick={handleMenuClick}
-              className={`flex items-center gap-4 px-6 cursor-pointer md:py-3 py-4 text-sm font-[SairaMedium] ${
-                pageName === item.path
-                  ? "bg-gray-50"
-                  : ""
-              }`}
-            >
-              <item.icon size={20} />
-              {item.name}
-            </Link>
-          ))}
+        {/* Navigation */}
+        <nav className="flex flex-col py-6 px-4 space-y-2">
+          {menuItems.map((item, index) => {
+            const isActive = pageName === item.path;
+            return (
+              <Link
+                key={index}
+                href={item.link}
+                onClick={handleMenuClick}
+                className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all text-sm font-medium ${
+                  isActive
+                    ? "bg-indigo-100 text-indigo-700 font-semibold"
+                    : "text-gray-700 hover:bg-gray-100"
+                }`}
+              >
+                <item.icon size={20} />
+                {item.name}
+              </Link>
+            );
+          })}
         </nav>
 
-        <div className="p-6">
+        {/* Logout Button */}
+        <div className="mt-auto p-6 border-t border-gray-100">
           <button
-            className="flex items-center font-[SairaMedium] gap-4 hover:text-red-500 text-sm "
             onClick={handleLogout}
+            className="flex items-center gap-3 text-sm text-red-600 hover:text-red-700 transition"
           >
             <LogOut size={20} />
             Log out
           </button>
         </div>
       </aside>
+
+      {/* Overlay */}
       {isSidebarOpen && (
         <div
-          className="fixed inset-0 bg-black opacity-50 z-30 md:hidden"
+          className="fixed inset-0 bg-black bg-opacity-40 z-30 md:hidden"
           onClick={() => setIsSidebarOpen(false)}
         />
       )}
