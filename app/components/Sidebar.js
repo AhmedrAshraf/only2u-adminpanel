@@ -78,7 +78,7 @@ const Sidebar = () => {
               className={`flex items-center gap-4 px-6 cursor-pointer md:py-3 py-4 text-sm font-[SairaMedium] ${
                 pageName === item.path
                   ? "bg-gray-50"
-                  : ""
+                  : "bg-amber-300"
               }`}
             >
               <item.icon size={20} />
