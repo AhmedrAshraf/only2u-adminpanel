@@ -35,7 +35,7 @@ export default function DashboardPage() {
 
   const router = useRouter();
  
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   
 
