@@ -12,6 +12,11 @@
   --font-mono: var(--font-geist-mono);
 }
 
+aside::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
