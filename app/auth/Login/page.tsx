@@ -25,7 +25,7 @@ const LoginPage = () => {
       toast.error("Please fill in all fields!");
       return;
     }
-    router.push('/app/admin/UserMang')
+    router.push('/admin/Dashboard')
     setIsLoading(false);
   };
 

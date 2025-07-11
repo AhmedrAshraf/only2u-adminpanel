@@ -4,7 +4,7 @@ import UserMang from './admin/UserMang/page'
 import DashboardPage from './admin/Dashboard/page';
 
 const page = () => {
-  return <DashboardPage />
+  return <LoginPage />
 }
 
 export default page;

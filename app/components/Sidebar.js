@@ -10,7 +10,9 @@ import {
   UserPlus,
   Bell,
   Settings2,
-  FileCheck
+  FileCheck,
+  LogOut,
+  X
 } from "lucide-react";
 // import { auth } from "../utils/firebaseConfig";
 import { usePathname, useRouter } from "next/navigation";
@@ -24,13 +26,13 @@ const Sidebar = () => {
 
   const menuItems = [
     { name: "Dashboard", icon: Home, link: "/admin/Dashboard", path: "Dashboard" },
-    { name: "KYC Details", icon: FileCheck, link: "/admin/KYCApproval", path: "KYCApproval" },
-    { name: "Fund Raises", icon: UserPlus, link: "/admin/NeedyApproval", path: "NeedyApproval" },
-    { name: "Donations", icon: HandHeart, link: "/admin/Donations", path: "Donations" },
-    { name: "Contact Inqueries", icon: Contact, link: "/admin/ContactInqueries", path: "ContactInqueries" },
-    { name: "Notifications", icon: Bell, link: "/admin/Notification", path: "Notification" },
-    { name: "Users", icon: Users, link: "/admin/Users", path: "Users" },
-    { name: "Settings", icon: Settings2, link: "/admin/Settings", path: "Settings" },
+    // { name: "KYC Details", icon: FileCheck, link: "/admin/KYCApproval", path: "KYCApproval" },
+    // { name: "Fund Raises", icon: UserPlus, link: "/admin/NeedyApproval", path: "NeedyApproval" },
+    // { name: "Donations", icon: HandHeart, link: "/admin/Donations", path: "Donations" },
+    // { name: "Contact Inqueries", icon: Contact, link: "/admin/ContactInqueries", path: "ContactInqueries" },
+    // { name: "Notifications", icon: Bell, link: "/admin/Notification", path: "Notification" },
+    // { name: "Users", icon: Users, link: "/admin/Users", path: "Users" },
+    // { name: "Settings", icon: Settings2, link: "/admin/Settings", path: "Settings" },
 
   ];
 
