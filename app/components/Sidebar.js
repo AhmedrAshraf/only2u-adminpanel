@@ -25,7 +25,7 @@ const Sidebar = () => {
   const pageName = path.split("/").pop();
 
   const menuItems = [
-    { name: "Dashboard", icon: Home, link: "/admin/Dashboard", path: "Dashboard" },
+    { name: "Dashboard", icon: Home, link: "/admin/CatMang", path: "Dashboard" },
     // { name: "KYC Details", icon: FileCheck, link: "/admin/KYCApproval", path: "KYCApproval" },
     // { name: "Fund Raises", icon: UserPlus, link: "/admin/NeedyApproval", path: "NeedyApproval" },
     // { name: "Donations", icon: HandHeart, link: "/admin/Donations", path: "Donations" },
