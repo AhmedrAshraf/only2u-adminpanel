@@ -28,7 +28,7 @@ const Sidebar = () => {
     { name: "Dashboard", icon: Home, link: "/admin/Dashboard", path: "Dashboard" },
     { name: "Color Management", icon: FileCheck, link: "/admin/ColorMang", path: "ColorMangement" },
     { name: "Order Management", icon: UserPlus, link: "/admin/OrderMang", path: "OrderManagement" },
-    // { name: "Donations", icon: HandHeart, link: "/admin/Donations", path: "Donations" },
+    { name: "Product Management", icon: HandHeart, link: "/admin/ProductMang", path: "Product Management" },
     // { name: "Contact Inqueries", icon: Contact, link: "/admin/ContactInqueries", path: "ContactInqueries" },
     // { name: "Notifications", icon: Bell, link: "/admin/Notification", path: "Notification" },
     // { name: "Users", icon: Users, link: "/admin/Users", path: "Users" },
