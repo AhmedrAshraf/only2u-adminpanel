@@ -30,7 +30,7 @@ const Sidebar = () => {
     { name: "Order Management", icon: UserPlus, link: "/admin/OrderMang", path: "OrderManagement" },
     { name: "Product Management", icon: HandHeart, link: "/admin/ProductMang", path: "ProductManagement" },
     { name: "Category Management", icon: Contact, link: "/admin/CatMang", path: "CategoryMangement" },
-    // { name: "Notifications", icon: Bell, link: "/admin/Notification", path: "Notification" },
+    { name: "User Management", icon: Bell, link: "/admin/UserMang", path: "UserManagement" },
     // { name: "Users", icon: Users, link: "/admin/Users", path: "Users" },
     // { name: "Settings", icon: Settings2, link: "/admin/Settings", path: "Settings" },
 
@@ -78,7 +78,7 @@ const Sidebar = () => {
               className={`flex items-center gap-4 px-6 cursor-pointer md:py-3 py-4 text-sm font-[SairaMedium] ${
                 pageName === item.path
                   ? "bg-gray-50"
-                  : "bg-amber-300"
+                  : ""
               }`}
             >
               <item.icon size={20} />
