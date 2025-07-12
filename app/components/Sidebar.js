@@ -30,12 +30,6 @@ const Sidebar = () => {
       path: "Dashboard",
     },
     {
-      name: "Color Management",
-      icon: FileCheck,
-      link: "/admin/ColorMang",
-      path: "ColorMang",
-    },
-    {
       name: "Order Management",
       icon: UserPlus,
       link: "/admin/OrderMang",

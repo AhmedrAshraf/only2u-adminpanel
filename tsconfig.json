@@ -22,6 +22,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/admin/OrderMang/page.js", "app/admin/Dashboard/page.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/admin/OrderMang/page.js", "app/admin/Dashboard/page.js", "app/admin/ProductMang/page.js"],
   "exclude": ["node_modules"]
 }

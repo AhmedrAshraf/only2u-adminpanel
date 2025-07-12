@@ -9,7 +9,6 @@ const pageTitleMap = {
   OrderMang: "Order Management",
   UserMang: "User Management",
   ProductMang: "Product Catalog",
-  ColorMang: "Color Management",
   CatMang: "Category Management",
   // Add more as needed
 };
