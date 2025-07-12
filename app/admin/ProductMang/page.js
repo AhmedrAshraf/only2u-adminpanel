@@ -46,6 +46,16 @@ export default function ProductManagement() {
   const [showColorModal, setShowColorModal] = useState(false);
   const [currentColorProduct, setCurrentColorProduct] = useState(null);
   const [newColor, setNewColor] = useState('');
+  const [showAddProductModal, setShowAddProductModal] = useState(false);
+  const [newProduct, setNewProduct] = useState({
+    image: 'https://via.placeholder.com/150',
+    name: '',
+    price: 0,
+    colors: [],
+    quantity: 0,
+    status: 'Out of Stock',
+    category: 'Electronics'
+  });
 
   // Stats
   const totalProducts = products.length;
@@ -57,20 +67,20 @@ export default function ProductManagement() {
     const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesStatus = statusFilter === 'All' || product.status === statusFilter;
     const matchesCategory = categoryFilter === 'All' || product.category === categoryFilter;
-    
+
     return matchesSearch && matchesStatus && matchesCategory;
   });
 
   // Handle edit
   const handleEdit = (product) => {
     setEditingId(product.id);
-    setEditForm({...product});
+    setEditForm({ ...product });
   };
 
   // Handle save
   const handleSave = (id) => {
-    setProducts(products.map(product => 
-      product.id === id ? {...editForm} : product
+    setProducts(products.map(product =>
+      product.id === id ? { ...editForm } : product
     ));
     setEditingId(null);
   };
@@ -83,14 +93,14 @@ export default function ProductManagement() {
   // Handle input change
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setEditForm(prev => ({...prev, [name]: value}));
+    setEditForm(prev => ({ ...prev, [name]: value }));
   };
 
   // Handle price change
   const handlePriceChange = (e) => {
     const value = parseFloat(e.target.value);
     if (!isNaN(value)) {
-      setEditForm(prev => ({...prev, price: value}));
+      setEditForm(prev => ({ ...prev, price: value }));
     }
   };
 
@@ -99,7 +109,7 @@ export default function ProductManagement() {
     const value = parseInt(e.target.value);
     if (!isNaN(value)) {
       const newStatus = value > 0 ? 'In Stock' : 'Out of Stock';
-      setEditForm(prev => ({...prev, quantity: value, status: newStatus}));
+      setEditForm(prev => ({ ...prev, quantity: value, status: newStatus }));
     }
   };
 
@@ -113,8 +123,8 @@ export default function ProductManagement() {
   const addColor = () => {
     if (newColor && !currentColorProduct.colors.includes(newColor)) {
       const updatedColors = [...currentColorProduct.colors, newColor];
-      setProducts(products.map(p => 
-        p.id === currentColorProduct.id ? {...p, colors: updatedColors} : p
+      setProducts(products.map(p =>
+        p.id === currentColorProduct.id ? { ...p, colors: updatedColors } : p
       ));
       setNewColor('');
     }
@@ -123,10 +133,10 @@ export default function ProductManagement() {
   // Remove color
   const removeColor = (colorToRemove) => {
     const updatedColors = currentColorProduct.colors.filter(c => c !== colorToRemove);
-    setProducts(products.map(p => 
-      p.id === currentColorProduct.id ? {...p, colors: updatedColors} : p
+    setProducts(products.map(p =>
+      p.id === currentColorProduct.id ? { ...p, colors: updatedColors } : p
     ));
-    setCurrentColorProduct({...currentColorProduct, colors: updatedColors});
+    setCurrentColorProduct({ ...currentColorProduct, colors: updatedColors });
   };
 
   return (
@@ -306,6 +316,12 @@ export default function ProductManagement() {
               >
                 Clear Filters
               </button>
+              <button
+                className="py-2 px-4 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
+                onClick={() => setShowAddProductModal(true)}
+              >
+                Add Product
+              </button>
             </div>
           </div>
         </div>
@@ -379,17 +395,17 @@ export default function ProductManagement() {
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
                         {product.colors.slice(0, 3).map((color, i) => (
-                          <div 
-                            key={i} 
+                          <div
+                            key={i}
                             className="h-5 w-5 rounded-full border border-gray-200 mr-1"
-                            style={{backgroundColor: color}}
+                            style={{ backgroundColor: color }}
                             title={color}
                           ></div>
                         ))}
                         {product.colors.length > 3 && (
                           <span className="text-xs text-gray-500 ml-1">+{product.colors.length - 3}</span>
                         )}
-                        <button 
+                        <button
                           onClick={() => openColorModal(product)}
                           className="ml-2 text-xs text-indigo-600 hover:text-indigo-900"
                         >
@@ -422,11 +438,10 @@ export default function ProductManagement() {
                           <option value="Out of Stock">Out of Stock</option>
                         </select>
                       ) : (
-                        <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                          product.status === 'In Stock' 
-                            ? 'bg-green-100 text-green-800' 
-                            : 'bg-red-100 text-red-800'
-                        }`}>
+                        <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${product.status === 'In Stock'
+                          ? 'bg-green-100 text-green-800'
+                          : 'bg-red-100 text-red-800'
+                          }`}>
                           {product.status}
                         </span>
                       )}
@@ -482,7 +497,7 @@ export default function ProductManagement() {
 
       {/* Color Management Modal */}
       {showColorModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div className="fixed inset-0 backdrop-blur-sm bg-white/30 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-lg shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto">
             <div className="p-6">
               <div className="flex justify-between items-center mb-4">
@@ -529,9 +544,9 @@ export default function ProductManagement() {
                   {currentColorProduct.colors.map((color, index) => (
                     <div key={index} className="flex items-center justify-between p-2 border rounded">
                       <div className="flex items-center">
-                        <div 
+                        <div
                           className="h-6 w-6 rounded-full border border-gray-200 mr-3"
-                          style={{backgroundColor: color}}
+                          style={{ backgroundColor: color }}
                         ></div>
                         <span className="text-sm font-mono">{color}</span>
                       </div>
@@ -547,6 +562,113 @@ export default function ProductManagement() {
               </div>
             </div>
           </div>
+        </div>
+      )}
+
+      {/* Product management Modal */}
+      {showAddProductModal && (
+        <div className="fixed inset-0 backdrop-blur-sm bg-white/30 flex items-center justify-center p-4 z-50">          <div className="bg-white rounded-lg shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+          <div className="p-6">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-lg font-medium text-gray-900">
+                Add New Product
+              </h3>
+              <button
+                onClick={() => {
+                  setShowAddProductModal(false);
+                  setNewProduct({
+                    image: 'https://via.placeholder.com/150',
+                    name: '',
+                    price: 0,
+                    colors: [],
+                    quantity: 0,
+                    status: 'Out of Stock',
+                    category: 'Electronics'
+                  });
+                }}
+                className="text-gray-400 hover:text-gray-500"
+              >
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Product Name</label>
+                <input
+                  type="text"
+                  value={newProduct.name}
+                  onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })}
+                  className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Price</label>
+                <input
+                  type="number"
+                  value={newProduct.price}
+                  onChange={(e) => setNewProduct({ ...newProduct, price: parseFloat(e.target.value) || 0 })}
+                  className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  step="0.01"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Quantity</label>
+                <input
+                  type="number"
+                  value={newProduct.quantity}
+                  onChange={(e) => {
+                    const quantity = parseInt(e.target.value) || 0;
+                    setNewProduct({
+                      ...newProduct,
+                      quantity,
+                      status: quantity > 0 ? 'In Stock' : 'Out of Stock'
+                    });
+                  }}
+                  className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
+                <select
+                  value={newProduct.category}
+                  onChange={(e) => setNewProduct({ ...newProduct, category: e.target.value })}
+                  className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                >
+                  <option value="Electronics">Electronics</option>
+                  <option value="Accessories">Accessories</option>
+                  <option value="Clothing">Clothing</option>
+                </select>
+              </div>
+
+              <button
+                onClick={() => {
+                  const newId = Math.max(...products.map(p => p.id), 0) + 1;
+                  setProducts([...products, { ...newProduct, id: newId }]);
+                  setShowAddProductModal(false);
+                  setNewProduct({
+                    image: 'https://via.placeholder.com/150',
+                    name: '',
+                    price: 0,
+                    colors: [],
+                    quantity: 0,
+                    status: 'Out of Stock',
+                    category: 'Electronics'
+                  });
+                }}
+                className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700"
+                disabled={!newProduct.name}
+              >
+                Add Product
+              </button>
+            </div>
+          </div>
+        </div>
         </div>
       )}
     </div>
